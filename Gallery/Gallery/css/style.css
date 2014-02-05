@@ -1,0 +1,221 @@
+/** * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {	margin: 0;	padding: 0;	border: 0;	font-size: 100%;	font: inherit;	vertical-align: baseline;}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, main {	display: block;}body {	line-height: 1;}ol, ul {	list-style: none;}blockquote, q {	quotes: none;}blockquote:before, blockquote:after,q:before, q:after {	content: '';	content: none;}table {	border-collapse: collapse;	border-spacing: 0;}
+
+
+/* Settings for the whole document */
+
+
+html, body {
+    height: 100%;
+    width: auto;
+    background-color: #eeeeee;
+    font-family: 'Source Sans Pro', Tahoma, Verdana, Arial;
+    font-size: 12pt;
+    font-weight: 400;
+    color: #000000;
+    margin-top: 0px;
+}
+
+
+/* Formatting for Block-elements */
+
+
+.Wrapper {
+    min-height: 100%;    
+    margin-bottom: -45px;    
+    width: auto;
+}
+
+.Wrapper:after {
+  content: "";
+  display: block;
+}
+
+.site-footer, .Wrapper:after {
+    /* .push must be the same height as footer */
+    height: 45px; 
+}
+
+.site-footer {
+    background: #383838;
+}
+
+header {
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 45px;
+}
+
+#HeaderMenu {
+    float: right;
+    margin-right: 20px;
+}
+
+article {
+    width: auto;
+    min-height: 300px;
+    padding-left: 20px;        
+    padding-right: 20px;
+}
+
+section {
+    max-width: 960px; 
+    margin: 0px auto;
+    padding-top: 35px; 
+    color: #000000;
+}
+
+.grey {
+    background-color: #e1e1e1;
+}
+
+.white {
+    background-color: #fbfbfb;
+}
+
+.rounded {
+	-webkit-border-radius: 10px; 
+	border-radius: 10px; 
+	background-color:#006b9f; 
+	padding: 5px; 
+	margin-bottom: 10px;
+}
+
+#form1 {
+    height: 100%;
+}
+
+/* Settings for headers and text */
+
+
+h1 {
+    font-size: 36pt;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    font-weight: 400;
+}
+
+h2 {
+    font-size: 20pt;
+    margin-bottom: 6px;
+    margin-top: 0px;
+    font-weight: 400;
+}
+
+h3 {
+    font-size: 16pt;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 14pt;
+    margin-bottom: 6px;
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+.smaller {
+	font-size: 10pt;
+}
+
+
+/* Settings for links and menus */
+
+
+a:link {
+    color: #3580a7;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #3580a7;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #66afd5;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #66afd5;
+    text-decoration: underline;
+}
+
+a:focus {
+    color: #66afd5;
+    text-decoration: underline;
+}
+
+#HeaderMenu a {
+    font-size: 12pt;
+    color:  #1c8fba;
+    font-weight: 700;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+#HeaderMenu a:hover {
+    font-size: 12pt;
+    color:  #10516a;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+/* List settings */
+
+
+ul {
+    padding-left: 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+li {
+    list-style: circle;
+    padding-left: 10px;
+}
+
+
+/* Form settings */
+        
+
+input {
+    padding: 1%;
+}
+
+.standardButton {
+    margin-top: 15px;
+}
+
+.field-validation-error {
+    color: red;
+    font-size: 10pt;
+}
+
+.inputSpacing {
+    margin-bottom: 20px;
+}
+
+
+/* Table settings */
+
+
+table, th, td
+{
+    border: 0px solid;
+}
+
+th, thead, tfoot 
+{ 
+    background-color: #353535; 
+    color: #f4f4f4;
+    height: 30px;
+    padding: 2%;
+}
