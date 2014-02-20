@@ -26,12 +26,15 @@
                 <section>
                     <h2>Bildvisaren</h2>
                     <div>
+                        <asp:Image ID="SelectedImage" Width="100%" runat="server" />
+                    </div>
+                    <div>
                         <asp:Repeater ID="GalleryThumbnailsRepeater" runat="server" ItemType="System.IO.FileInfo" SelectMethod="GalleryThumbnailsRepeater_GetData">
                             <HeaderTemplate>
                                 <div>
                             </HeaderTemplate>
                             <ItemTemplate>
-                                <asp:HyperLink ID="PictureHyperLink" runat="server" NavigateUrl='<%# "~/galleryImages/" + Item.Name %>'>
+                                <asp:HyperLink ID="PictureHyperLink" runat="server" NavigateUrl='<%# "~/Default.aspx?Picture=" + Item.Name %>'>
                                     <img src='<%# "galleryImages/thumbnails/" + Item.Name %>' width="150" height="150" alt="" />
                                 </asp:HyperLink>
                             </ItemTemplate>
