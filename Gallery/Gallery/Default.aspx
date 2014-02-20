@@ -22,17 +22,25 @@
             <h1>Galleriet</h1>
             </header>            
 
-            <article class="grey">
+            <article class="white">
                 <section>
                     <h2>Bildvisaren</h2>
                     <p>Lorem Ipsum.</p>
                 </section>
             </article>
 
-            <article class="white">
+            <article class="grey">
                 <section>
                     <h2>Ladda upp bild</h2>
-                    <p>Lorem Ipsum.</p>
+                    <div>
+                        <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="field-validation-error" />
+                        <asp:FileUpload ID="PictureUpload" runat="server" />
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="En fil måste väljas!" Text="*" ControlToValidate="PictureUpload" Display="Dynamic" CssClass="field-validation-error"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Filen är inte av typen JPG/PNG/GIF" Text="*" ControlToValidate="PictureUpload" CssClass="field-validation-error" Display="Dynamic" ValidationExpression="([^\s]+(\.(?i)(jpg|png|gif))$)"></asp:RegularExpressionValidator>
+                    </div>
+                    <div>
+                        <asp:Button ID="UploadButton" runat="server" Text="Ladda upp bild" CssClass="standardButton" OnClick="UploadButton_Click" />
+                    </div>
                 </section>
             </article>
         </div>

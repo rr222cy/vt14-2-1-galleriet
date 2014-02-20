@@ -13,5 +13,13 @@ namespace Gallery
         {
 
         }
+
+        protected void UploadButton_Click(object sender, EventArgs e)
+        {
+            if(IsValid)
+            {
+                // Awesome here.
+            }
+        }
     }
 }
