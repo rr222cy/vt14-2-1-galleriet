@@ -7,5 +7,6 @@ namespace Gallery.Models
 {
     public class Gallery
     {
+        private static string PhysicalUploadedImagesPath = "~/galleryImages/";
     }
 }

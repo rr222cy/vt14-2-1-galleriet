@@ -25,7 +25,21 @@
             <article class="white">
                 <section>
                     <h2>Bildvisaren</h2>
-                    <p>Lorem Ipsum.</p>
+                    <div>
+                        <asp:Repeater ID="GalleryThumbnailsRepeater" runat="server" ItemType="System.IO.FileInfo" SelectMethod="GalleryThumbnailsRepeater_GetData">
+                            <HeaderTemplate>
+                                <div>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:HyperLink ID="PictureHyperLink" runat="server" NavigateUrl='<%# "~/galleryImages/" + Item.Name %>'>
+                                    <img src='<%# "galleryImages/thumbnails/" + Item.Name %>' width="150" height="150" alt="" />
+                                </asp:HyperLink>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </div>
+                            </FooterTemplate>
+                        </asp:Repeater>
+                    </div>
                 </section>
             </article>
 
@@ -33,8 +47,9 @@
                 <section>
                     <h2>Ladda upp bild</h2>
                     <div>
+                        <p>Välj bilden du vill ladda upp</p>
                         <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="field-validation-error" />
-                        <asp:FileUpload ID="PictureUpload" runat="server" />
+                        <asp:FileUpload ID="PictureUpload" runat="server" CssClass="standardButton" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="En fil måste väljas!" Text="*" ControlToValidate="PictureUpload" Display="Dynamic" CssClass="field-validation-error"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Filen är inte av typen JPG/PNG/GIF" Text="*" ControlToValidate="PictureUpload" CssClass="field-validation-error" Display="Dynamic" ValidationExpression="([^\s]+(\.(?i)(jpg|png|gif))$)"></asp:RegularExpressionValidator>
                     </div>

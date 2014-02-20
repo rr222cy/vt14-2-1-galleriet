@@ -60,6 +60,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Error.html" />
     <Content Include="Scripts\jquery-2.1.0.js" />
@@ -99,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="galleryImages\thumbnails\" />
     <Folder Include="pics\" />
   </ItemGroup>
   <PropertyGroup>

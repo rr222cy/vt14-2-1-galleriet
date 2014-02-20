@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Gallery.Models;
+using System.IO;
 
 namespace Gallery
 {
@@ -18,8 +20,23 @@ namespace Gallery
         {
             if(IsValid)
             {
-                // Awesome here.
+                if (PictureUpload.PostedFile != null)
+                {
+                    String filename = PictureUpload.PostedFile.FileName;
+                    PictureUpload.PostedFile.SaveAs(Server.MapPath(@"~/galleryImages/"+filename));
+
+                    System.Drawing.Image image = System.Drawing.Image.FromFile(Server.MapPath(@"~/galleryImages/"+filename));
+                    System.Drawing.Image thumbnail = image.GetThumbnailImage(150, 150, null, System.IntPtr.Zero);
+
+                    thumbnail.Save(Server.MapPath(@"~/galleryImages/thumbnails/"+filename));
+                }
             }
+        }
+
+        public IEnumerable<System.IO.FileInfo> GalleryThumbnailsRepeater_GetData()
+        {
+            var dir = new DirectoryInfo(Server.MapPath(@"~/galleryImages/thumbnails/"));
+            return dir.GetFiles();
         }
     }
 }
