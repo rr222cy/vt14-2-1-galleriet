@@ -3,7 +3,7 @@
   <Class Name="Gallery.Default" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACAAAAAAAAAIAAAAACAAIAAAAAAAAAAAAAIgAgA=</HashCode>
+      <HashCode>AAAAACAAAAAAAAAYAAAAACAAIAAAAAAQAAAAAIIgggA=</HashCode>
       <FileName>Default.aspx.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -14,11 +14,11 @@
       <FileName>Global.asax.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Gallery.Models.Gallery">
+  <Class Name="Gallery.Models.GalleryClass">
     <Position X="5.75" Y="1.75" Width="4" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Gallery.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAABAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GalleryClass.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

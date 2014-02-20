@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Gallery.Models;
 using System.IO;
-using Gallery.Models;
 
 namespace Gallery
 {
@@ -16,7 +15,7 @@ namespace Gallery
         {
             if (Request.QueryString["Picture"] != null)
             {
-                SelectedImage.ImageUrl = String.Format("/galleryImages/{0}", Request.QueryString["Picture"]);
+                SelectedImage.ImageUrl = String.Format("/galleryImages/{0}", Request.QueryString["Picture"]);              
             }
         }
 
@@ -42,16 +41,24 @@ namespace Gallery
                     System.Drawing.Image thumbnail = image.GetThumbnailImage(150, 150, null, System.IntPtr.Zero);
                     thumbnail.Save(Server.MapPath(@"~/galleryImages/thumbnails/"+filename));
 
-                    SelectedImage.ImageUrl = String.Format("/galleryImages/{0}", filename);
+                    UploadStatusLabel.Text = "Uppladdningen lyckades!";
+                    Response.Redirect(String.Format("~/Default.aspx?Picture={0}", filename));
                 }
             }
         }
 
-        public IEnumerable<System.IO.FileInfo> GalleryThumbnailsRepeater_GetData()
+        public IEnumerable<GalleryClass> GalleryThumbnailsRepeater_GetData()
         {
             // Gets all the thumbnails.
             var dir = new DirectoryInfo(Server.MapPath(@"~/galleryImages/thumbnails/"));
-            return dir.GetFiles();
+            //return dir.GetFiles();
+
+            return (from files in dir.GetFiles()
+                    select new Gallery.Models.GalleryClass
+                    {
+                        Name = files.Name,
+                        Class = "imageBorder"
+                    }).AsEnumerable();
         }
     }
 }

@@ -5,8 +5,11 @@ using System.Web;
 
 namespace Gallery.Models
 {
-    public class Gallery
+    public class GalleryClass
     {
         private static string PhysicalUploadedImagesPath = "~/galleryImages/";
+
+        public string Class;
+        public string Name;
     }
 }

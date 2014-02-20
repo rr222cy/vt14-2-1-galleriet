@@ -28,14 +28,15 @@
                     <div>
                         <asp:Image ID="SelectedImage" Width="100%" runat="server" />
                     </div>
-                    <div>
-                        <asp:Repeater ID="GalleryThumbnailsRepeater" runat="server" ItemType="System.IO.FileInfo" SelectMethod="GalleryThumbnailsRepeater_GetData">
+                    <div class="spacingTop">
+                        <%-- Repeater that loops out all thumbnails in the gallery. --%>
+                        <asp:Repeater ID="GalleryThumbnailsRepeater" runat="server" ItemType="Gallery.Models.GalleryClass" SelectMethod="GalleryThumbnailsRepeater_GetData">
                             <HeaderTemplate>
                                 <div>
                             </HeaderTemplate>
                             <ItemTemplate>
                                 <asp:HyperLink ID="PictureHyperLink" runat="server" NavigateUrl='<%# "~/Default.aspx?Picture=" + Item.Name %>'>
-                                    <img src='<%# "galleryImages/thumbnails/" + Item.Name %>' width="150" height="150" alt="" />
+                                    <img src='<%# "galleryImages/thumbnails/" + Item.Name %>' width="150" height="150" Class='<%# Item.Name %>' alt="" runat="server" />
                                 </asp:HyperLink>
                             </ItemTemplate>
                             <FooterTemplate>
@@ -46,11 +47,20 @@
                 </section>
             </article>
 
+            <%-- Highlights the thumbnail of the picture that is beeing shown. --%>
+            <script>
+                var querystring = window.location.search.substring(9);
+                var pictureClass = document.getElementsByClassName(querystring)[0].setAttribute("class", "imageBorder");
+            </script>
+
             <article class="grey">
                 <section>
                     <h2>Ladda upp bild</h2>
                     <div>
                         <p>Välj bilden du vill ladda upp</p>
+                        <p><asp:Label ID="UploadStatusLabel" runat="server" Text="" CssClass="smaller"></asp:Label></p>
+                        
+                        <%-- Upload control and validation that checks if a file is chosen, and filetype is allowed. --%>
                         <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="field-validation-error" />
                         <asp:FileUpload ID="PictureUpload" runat="server" CssClass="standardButton" />
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="En fil måste väljas!" Text="*" ControlToValidate="PictureUpload" Display="Dynamic" CssClass="field-validation-error"></asp:RequiredFieldValidator>

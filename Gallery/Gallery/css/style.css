@@ -22,6 +22,9 @@ html, body {
 
 /* Formatting for Block-elements */
 
+.imageBorder {
+    border: 3px solid;
+}
 
 .Wrapper {
     min-height: 100%;    
@@ -69,6 +72,10 @@ section {
     color: #000000;
 }
 
+.spacingTop {
+    margin-top: 10px;
+}
+
 .grey {
     background-color: #e1e1e1;
 }
@@ -100,7 +107,7 @@ h1 {
 }
 
 h2 {
-    font-size: 20pt;
+    font-size: 24pt;
     margin-bottom: 6px;
     margin-top: 0px;
     font-weight: 400;
