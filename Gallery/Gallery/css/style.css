@@ -84,6 +84,10 @@ section {
     background-color: #fbfbfb;
 }
 
+.green {
+    background-color: #9cff8c;
+}
+
 .rounded {
 	-webkit-border-radius: 10px; 
 	border-radius: 10px; 
@@ -94,6 +98,10 @@ section {
 
 #form1 {
     height: 100%;
+}
+
+#MessageWrapper {
+    max-height: 180px;
 }
 
 /* Settings for headers and text */

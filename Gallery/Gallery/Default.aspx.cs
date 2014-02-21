@@ -17,6 +17,11 @@ namespace Gallery
             {
                 SelectedImage.ImageUrl = String.Format("/galleryImages/{0}", Request.QueryString["Picture"]);              
             }
+
+            if (Request.QueryString["Success"] != null)
+            {
+                Message.Visible = true;
+            }
         }
 
         protected void UploadButton_Click(object sender, EventArgs e)
@@ -41,8 +46,9 @@ namespace Gallery
                     System.Drawing.Image thumbnail = image.GetThumbnailImage(150, 150, null, System.IntPtr.Zero);
                     thumbnail.Save(Server.MapPath(@"~/galleryImages/thumbnails/"+filename));
 
-                    UploadStatusLabel.Text = "Uppladdningen lyckades!";
-                    Response.Redirect(String.Format("~/Default.aspx?Picture={0}", filename));
+                    
+
+                    Response.Redirect(String.Format("~/Default.aspx?Picture={0}&Success=Yes", filename));
                 }
             }
         }

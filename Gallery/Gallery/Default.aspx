@@ -20,7 +20,16 @@
                     <a href="Default.aspx">Startsidan</a>
                 </div>
             <h1>Galleriet</h1>
-            </header>            
+            </header>
+            
+            <div id="MessageWrapper">
+                <article id="Message" class="green" runat="server" visible="false">
+                    <section>
+                        <h2>Uppladdningen lyckades!</h2>
+                        <a href="#" id="CloseMessage">Stäng meddelande</a> 
+                    </section>
+                </article>            
+            </div>
 
             <article class="white">
                 <section>
@@ -47,19 +56,11 @@
                 </section>
             </article>
 
-            <%-- Highlights the thumbnail of the picture that is beeing shown. --%>
-            <script>
-                var querystring = window.location.search.substring(9);
-                var pictureClass = document.getElementsByClassName(querystring)[0].setAttribute("class", "imageBorder");
-            </script>
-
             <article class="grey">
                 <section>
                     <h2>Ladda upp bild</h2>
                     <div>
-                        <p>Välj bilden du vill ladda upp</p>
-                        <p><asp:Label ID="UploadStatusLabel" runat="server" Text="" CssClass="smaller"></asp:Label></p>
-                        
+                        <p>Välj bilden du vill ladda upp</p>                        
                         <%-- Upload control and validation that checks if a file is chosen, and filetype is allowed. --%>
                         <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="field-validation-error" />
                         <asp:FileUpload ID="PictureUpload" runat="server" CssClass="standardButton" />
@@ -79,6 +80,7 @@
             </div>
         </footer>
     </form>
+<%-- Highlights the thumbnail of the picture that is beeing shown. Adds functionallity to remove successmessage. --%>
 <script type="text/javascript" src="js/scripts.js"></script>
 </body>
 </html>
