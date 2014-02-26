@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -29,17 +30,56 @@ namespace Gallery.Models
         // Method for checking if a image truly exists, returns true or false.
         public static bool ImageExists(string name)
         {
-            throw new NotImplementedException();
+            return File.Exists(Path.Combine(PhysicalUploadedImagesPath, name));
         }
 
+        // Method for checking if the file is truly a image of supported type, if yes true is returned, else, false.
         private bool IsValidImage(Image image)
         {
-            throw new NotImplementedException();
+            if (image.RawFormat.Guid == ImageFormat.Gif.Guid || image.RawFormat.Guid == ImageFormat.Jpeg.Guid || image.RawFormat.Guid == ImageFormat.Png.Guid)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }           
         }
 
         public string SaveImage(Stream stream, string fileName)
         {
-            throw new NotImplementedException();
+            System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
+
+            // Checks if the file truly is a image, and a supported one.
+            if (!IsValidImage(image))
+            {
+                throw new ArgumentException("The file is not a valid picture, .gif, .jpg, .png supported only.");
+            }
+
+            // Checks that the file has no illegal characters in filename.
+            if (SantizePath.IsMatch(fileName))
+            {
+                throw new ArgumentException("The file has illegal characters in filename, please change.");
+            }
+
+            // Checks if a picture with the same name exists, if yes, a character will be added in a later loop.
+            if (ImageExists(fileName))
+            {
+                // This loops checks if a picture with the same name exists, if yes, a character will be added.
+                while (ImageExists(fileName))
+                {
+                    fileName = "(2)" + fileName;
+                }
+            }
+
+            // Saves the image since it has passed all tests.
+            image.Save(Path.Combine(PhysicalUploadedImagesPath, fileName));
+
+            // Settings for the thumbnail to be created, 150x150px here - also saves the thumbnail.
+            System.Drawing.Image thumbnail = image.GetThumbnailImage(150, 150, null, System.IntPtr.Zero);
+            thumbnail.Save(Path.Combine(PhysicalUploadedThumbnailsPath, fileName));
+
+            return fileName;
         }
 
         // Constructor.
