@@ -22,9 +22,17 @@ namespace Gallery.Models
         public string Name;
 
         // Method for returning a list-object-reference to all images in given directory.
-        public IEnumerable<string> GetImageNames()
+        public IEnumerable<GalleryClass> GetImageNames()
         {
-            throw new NotImplementedException();
+            // Gets all the thumbnails.
+            var dir = new DirectoryInfo(PhysicalUploadedThumbnailsPath);
+
+            return (from files in dir.GetFiles()
+                    select new Gallery.Models.GalleryClass
+                    {
+                        Name = files.Name,
+                        Class = "imageBorder"
+                    }).OrderBy(files => files.Name).ToList();          
         }
 
         // Method for checking if a image truly exists, returns true or false.
@@ -46,6 +54,7 @@ namespace Gallery.Models
             }           
         }
 
+        // Method for saving the uploaded image, plus generate a thumbnail in the desired size.
         public string SaveImage(Stream stream, string fileName)
         {
             System.Drawing.Image image = System.Drawing.Image.FromStream(stream);

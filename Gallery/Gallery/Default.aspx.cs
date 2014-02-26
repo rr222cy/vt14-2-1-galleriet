@@ -11,16 +11,31 @@ namespace Gallery
 {
     public partial class Default : System.Web.UI.Page
     {
+        private GalleryClass _galleryClass;
+
+        // Using lazy initialization of the GalleryClass object.
+        private GalleryClass Gallery
+        {
+            get
+            {
+                return _galleryClass ?? (_galleryClass = new GalleryClass());
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            // Gets the image out of the querystring.
             if (Request.QueryString["Picture"] != null)
             {
                 SelectedImage.ImageUrl = String.Format("/galleryImages/{0}", Request.QueryString["Picture"]);              
             }
 
-            if (Request.QueryString["Success"] != null)
+            // Prints out upload success message to user.
+            if (Session["Success"] != null)
             {
+                StatusMessage.Text = Session["Success"].ToString();
                 Message.Visible = true;
+                Session.Remove("Success");
             }
         }
 
@@ -28,43 +43,27 @@ namespace Gallery
         {
             if(IsValid)
             {
-                if (PictureUpload.PostedFile != null)
+                // If a file is beeing uploaded, the galleryclass is contacted to validate and save the image, plus create thumbnails.
+                if (PictureUpload.HasFile)
                 {
-                    String filename = PictureUpload.PostedFile.FileName;
-
-                    // This loops checks if a picture with the same name exists, if yes, a character will be added.
-                    while (File.Exists(Server.MapPath(@"~/galleryImages/" + filename)))
+                    try
                     {
-                        filename = "(2)" + filename;
+                        Gallery.SaveImage(PictureUpload.FileContent, PictureUpload.FileName);
+                        Session["Success"] = "Uppladdningen lyckades!";
+                        Response.Redirect(String.Format("~/Default.aspx?Picture={0}", PictureUpload.FileName));                      
                     }
-
-                    // Saves the image.
-                    PictureUpload.PostedFile.SaveAs(Server.MapPath(@"~/galleryImages/"+filename));
-
-                    // Creates a thumbnail with the size 150x150px.
-                    System.Drawing.Image image = System.Drawing.Image.FromFile(Server.MapPath(@"~/galleryImages/"+filename));
-                    System.Drawing.Image thumbnail = image.GetThumbnailImage(150, 150, null, System.IntPtr.Zero);
-                    thumbnail.Save(Server.MapPath(@"~/galleryImages/thumbnails/"+filename));
-
-                    
-
-                    Response.Redirect(String.Format("~/Default.aspx?Picture={0}&Success=Yes", filename));
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("", "Ett fel inträffade då bilden skulle laddas upp.");                       
+                    }                    
                 }
             }
         }
 
+        // Gets all the thumbnails.
         public IEnumerable<GalleryClass> GalleryThumbnailsRepeater_GetData()
         {
-            // Gets all the thumbnails.
-            var dir = new DirectoryInfo(Server.MapPath(@"~/galleryImages/thumbnails/"));
-            //return dir.GetFiles();
-
-            return (from files in dir.GetFiles()
-                    select new Gallery.Models.GalleryClass
-                    {
-                        Name = files.Name,
-                        Class = "imageBorder"
-                    }).AsEnumerable();
+            return Gallery.GetImageNames();
         }
     }
 }

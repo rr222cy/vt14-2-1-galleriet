@@ -25,7 +25,7 @@
             <div id="MessageWrapper">
                 <article id="Message" class="green" runat="server" visible="false">
                     <section>
-                        <h2>Uppladdningen lyckades!</h2>
+                        <h2><asp:Literal ID="StatusMessage" runat="server"></asp:Literal></h2>                       
                         <a href="#" id="CloseMessage">Stäng meddelande</a> 
                     </section>
                 </article>            
